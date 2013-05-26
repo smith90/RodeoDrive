@@ -1,0 +1,15 @@
+﻿@model RodeoDrive.WebUI.Models.LogOnViewModel
+
+@{
+    ViewBag.Title = "Адміністратор: Авторизація";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Увійти</h1>
+<p>Будь ласка авторизуйтесь, щоб увійти в меню адміністрування:</p>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.EditorForModel()
+    <p><input type="submit" value="Увійти" /></p>
+}

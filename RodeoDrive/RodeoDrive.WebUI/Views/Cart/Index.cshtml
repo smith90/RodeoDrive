@@ -1,0 +1,46 @@
+﻿@model RodeoDrive.WebUI.Models.CartIndexViewModel
+
+@{
+    ViewBag.Title = "RodeoDrive: Кошик";
+}
+
+<h2>Ваш кошик</h2>
+<table width="90%"style="text-align:center">
+    <thead>
+        <tr>
+            <th align="center">Кількість</th>
+            <th align="left">Назва</th>
+            <th align="right">Ціна</th>
+            <th align="right">Вартість</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.Cart.Lines)
+        {
+            <tr>
+                <td align="center">@line.Quantity</td>
+                <td align="left">@line.Product.Name</td>
+                <td align="right">@line.Product.Price.ToString("c")</td>
+                <td align="right">@((line.Quantity * line.Product.Price).ToString("c"))</td>
+                <td>
+                    @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                    {
+                        @Html.Hidden("ProductID", line.Product.ProductID)
+                        @Html.HiddenFor(x => x.ReturnUrl)
+                        <input class="actionButtons" type="submit" value="Видалити" />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" align="right">Всього:</td>
+            <td align="right">@Model.Cart.ComputeTotalValue().ToString("c")</td>
+        </tr>
+    </tfoot>
+</table>
+<p style="text-align:center" class="actionButtons">
+    <a href="@Model.ReturnUrl">Продовжити покупку</a>
+    @Html.ActionLink("Оформити замовлення", "Checkout")
+</p>

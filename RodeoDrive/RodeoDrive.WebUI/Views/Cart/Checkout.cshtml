@@ -1,0 +1,30 @@
+﻿@model RodeoDrive.Domain.Entities.ShippingDetails
+
+@{
+    ViewBag.Title = "RodeoDrive: Доставка та оплата";
+}
+
+<h2>Оплатити зараз</h2>
+Будь ласка введіть ваші контактні дані для доставки!
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    <h3>Доставити до</h3>
+    <div>Ім'я: @Html.EditorFor(x => x.Name)</div>
+    <h3>Адреса</h3>
+    <div>Вулиця: @Html.EditorFor(x => x.Line1)</div>
+    <div>Номер будинку: @Html.EditorFor(x => x.Line2)</div>
+    <div>Номер квартири: @Html.EditorFor(x => x.Line3)</div>
+    <div>Місто: @Html.EditorFor(x => x.City)</div>
+    <div>Регіон: @Html.EditorFor(x => x.State)</div>
+    <div>Код: @Html.EditorFor(x => x.Zip)</div>
+    <div>Країна: @Html.EditorFor(x => x.Country)</div>
+    <h3>Опції</h3>
+    <label>
+        @Html.EditorFor(x => x.GiftWrap)
+        Подарунковий пакет
+    </label>
+    <p style="text-align:center">
+        <input class="actionButtons" type="submit" value="Завершити замовлення" />
+    </p>
+}

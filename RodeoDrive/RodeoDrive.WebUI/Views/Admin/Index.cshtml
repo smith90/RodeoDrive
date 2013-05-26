@@ -1,0 +1,35 @@
+﻿@model IEnumerable<RodeoDrive.Domain.Entities.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Всі автомобілі</h1>
+
+<table class="Grid">
+    <tr>
+        <th>ID</th>
+        <th>Назва</th>
+        <th class="NumericCol">Ціна</th>
+        <th>Дії</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ProductID</td>
+            <td>@Html.ActionLink(item.Name, "Edit", new { item.ProductID})</td>
+            <td class="NumericCol">@item.Price.ToString("c")</td>
+            <td>
+                @using (Html.BeginForm("Delete", "Admin"))
+                {
+                    @Html.Hidden("ProductID", item.ProductID)
+                    <input type="submit" value="Видалити" />
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+<p>@Html.ActionLink("Створити новий продукт", "Create")</p>

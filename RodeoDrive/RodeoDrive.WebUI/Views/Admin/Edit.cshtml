@@ -1,0 +1,28 @@
+﻿@model RodeoDrive.Domain.Entities.Product
+
+@{
+    ViewBag.Title = "Адміністрування: Коригування " + @Model.Name;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Коригування @Model.Name</h1>
+
+@using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.EditorForModel()
+    <div class="editor-label">Фото</div>
+    <div class="editor-field">
+        @if (Model.ImageData == null)
+        {
+            @:Фото відсутнє
+        }
+        else
+        {
+            <img width="200" height="150"
+            src="@Url.Action("GetImage", "Product", new { Model.ProductID })" />
+        }
+    <div>Завантажити нове фото: <input type="file" name="Image" /></div>
+    </div>
+    <input type="submit" value="Зберегти" />
+    @Html.ActionLink("Відмінити та перейти до списку", "Index")
+}
